@@ -72,7 +72,7 @@ export default function Contact() {
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           eyebrow="Contact"
-          title="Let's build something together"
+          title="Let's Connect & Collaborate"
           desc="Open to internships, full-time roles, and collaborations."
         />
 
