@@ -59,7 +59,7 @@ export default function Navbar() {
           onClick={() => go("home")}
           className="text-lg font-semibold tracking-tight"
         >
-          <span className="text-white">YH</span>
+          {/* <span className="text-white">YH</span> */}
           <span className="ml-1 text-white/70">Yellakanti Harika</span>
         </button>
 
