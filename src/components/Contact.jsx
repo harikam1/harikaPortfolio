@@ -45,7 +45,7 @@ export default function Contact() {
       icon: "📧",
       label: "Email",
       value: "harikayellakanti82@gmail.com",
-      href: "mailto:harikayellakanti82@gmail.com",
+      href: "https://mail.google.com/mail/?view=cm&fs=1&to=harikayellakanti82@gmail.com",
     },
     {
       icon: "💼",
@@ -94,21 +94,12 @@ export default function Contact() {
               //   rel="noreferrer"
               //   className="glass group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(180,140,255,0.25)]"
               // >
-                // <a
-                //   key={c.label}
-                //   href={c.href}
-                //   target={c.href.startsWith("http") ? "_blank" : "_self"}
-                //   rel="noreferrer"
-                //   className="glass group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(180,140,255,0.25)]"
-                // >
                 <a
                   key={c.label}
                   href={c.href}
-                 {...(c.href.startsWith("http") && {
-                  target: "_blank",
-                  rel: "noreferrer",
-                 })}
-                 className="glass group flex items-center gap-4 rounded-2xl p-5"
+                  target={c.href.startsWith("http") ? "_blank" : "_self"}
+                  rel="noreferrer"
+                  className="glass group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(180,140,255,0.25)]"
                 >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-neon-blue to-neon-purple shadow-lg group-hover:scale-110 transition-transform">
                   <span className="text-lg">{c.icon}</span>
