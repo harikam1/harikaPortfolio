@@ -1,105 +1,109 @@
-import { motion } from "framer-motion";
+  import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import { Code, Layout, Server, Database, Wrench } from "lucide-react";
 
 const categories = [
-  {
+    {
     icon: Code,
     title: "Languages",
-    skills: [{ name: "Java" }, { name: "JavaScript" }],
+    skills: ["Java", "JavaScript"],
+    desc: "Foundation for logic and structure.",
+    color: "text-blue-400",
   },
   {
     icon: Layout,
     title: "Frontend",
-    skills: [{ name: "React" }, { name: "HTML / CSS" }],
+    skills: ["HTML", "CSS", "React", "Tailwind CSS"],
+    desc: "Crafting interactive user experiences.",
+    color: "text-purple-400",
   },
   {
     icon: Server,
     title: "Backend",
-    skills: [{ name: "Spring Boot" }, { name: "REST APIs" }],
+    skills: ["Spring Boot", "REST APIs"],
+    desc: "Robust architecture and business logic.",
+    color: "text-rose-400",
   },
   {
     icon: Database,
     title: "Database",
-    skills: [{ name: "MySQL" }, { name: "PostgreSQL" }],
+    skills: ["MySQL", "PostgreSQL",  "MongoDB"],
+    desc: "Efficient data management and storage.",
+    color: "text-emerald-400",
   },
   {
     icon: Wrench,
     title: "Tools",
-    skills: [
-      { name: "Git" },
-      { name: "Postman" },
-      { name: "AWS S3" },
-    ],
+    skills: ["Git","AWS S3", "Postman"],
+    desc: "The machinery that powers deployment.",
+    color: "text-amber-400",
   },
 ];
+  
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative px-4 py-24 overflow-hidden">
-
-      {/* 🔥 Background Glow (same as About) */}
-      <div
-        className="absolute inset-0 -z-10 
-        bg-[radial-gradient(circle_at_20%_20%,rgba(120,100,255,0.15),transparent_40%),
-             radial-gradient(circle_at_80%_70%,rgba(0,200,255,0.1),transparent_40%)]"
-      />
-
-      <div className="mx-auto max-w-6xl">
-
-        {/* Header */}
+    <section id="skills" className="relative px-6 py-24 bg-transparent">
+      <div className="mx-auto max-w-5xl">
         <SectionHeader
-          eyebrow="Skills"
-          title="My technical toolkit"
-          desc="A blend of backend strength and modern frontend craft."
+          eyebrow="SKILLS"
+          title="Technical Skills"
+          desc="A comprehensive breakdown of my professional stack and capabilities."
         />
 
-        {/* Cards */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((cat, i) => (
-            <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative rounded-2xl border border-white/10 
-                bg-white/5 backdrop-blur-xl 
-                p-6 transition-all 
-                hover:-translate-y-2 
-                hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
-            >
-              {/* Glow Blob */}
-              <div className="absolute -top-10 -right-10 h-24 w-24 rounded-full 
-                bg-gradient-to-br from-neon-blue/20 via-neon-purple/20 to-neon-cyan/20 
-                blur-2xl opacity-20 group-hover:opacity-40 transition"
-              />
+        <div className="mt-20 overflow-hidden rounded-xl border border-white/10 bg-white/[0.01]">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-white/10 bg-white/[0.02]">
+                <th className="px-8 py-5 text-sm font-semibold uppercase tracking-wider text-zinc-400 w-1/3">Category</th>
+                <th className="px-8 py-5 text-sm font-semibold uppercase tracking-wider text-zinc-400">Tech Stack</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {categories.map((cat, i) => (
+                <motion.tr
+                  key={cat.title}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: i * 0.05 }}
+                  viewport={{ once: true }}
+                  className="group hover:bg-white/[0.02] transition-colors"
+                >
+                  {/* Category Column */}
+                  <td className="px-8 py-8 align-top">
+                    <div className="flex items-center gap-4">
+                      <div className={`p-2 rounded-lg bg-white/5 border border-white/10 ${cat.color}`}>
+                        <cat.icon size={18} />
+                      </div>
+                      <span className="font-bold text-white tracking-tight">{cat.title}</span>
+                    </div>
+                  </td>
 
-              {/* Icon */}
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl 
-                bg-gradient-to-br from-neon-blue/20 via-neon-purple/20 to-neon-cyan/20 
-                shadow-[0_0_20px_rgba(120,100,255,0.3)] 
-                group-hover:scale-110 transition"
-              >
-                <cat.icon className="h-5 w-5 text-neon-cyan" />
-              </div>
+                  {/* Skills Column */}
+                  <td className="px-8 py-8">
+                    <div className="flex flex-wrap gap-x-6 gap-y-3">
+                      {cat.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="text-sm font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors flex items-center gap-2"
+                        >
+                          <span className={`h-1 w-1 rounded-full bg-current opacity-30 ${cat.color}`} />
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-              {/* Title */}
-              <h3 className="mt-4 font-semibold text-lg text-foreground">
-                {cat.title}
-              </h3>
-
-              {/* Skills List */}
-              <div className="mt-5 space-y-2">
-                {cat.skills.map((s, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm text-foreground/80">
-                    <span className="text-neon-cyan">•</span>
-                    {s.name}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+        {/* Professional Footer Detail */}
+        <div className="mt-8 flex justify-end">
+          <p className="text-[10px] font-mono text-zinc-600 uppercase tracking-[0.2em]">
+            Verified Stack // 2026.0
+          </p>
         </div>
       </div>
     </section>
