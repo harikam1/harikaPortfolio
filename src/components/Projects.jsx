@@ -10,7 +10,7 @@ const projects = [
     long: "A comprehensive solution for property managers and tenants. This system automates rent tracking, maintenance requests, and community notices. Built with a focus on security and scalability, it leverages JWT for protected routes and MongoDB for flexible data modeling.",
     tech: ["React", "Node.js", "MongoDB", "JWT"],
     link: "https://your-demo-link.com",
-    github: "https://github.com/harikam1",
+    github: "https://github.com/harikam1/apartment_management_system.git",
     // Professional property management/real estate dashboard visual
     image: "https://fortresstech.io/hubfs/property_management_software-1.webp",
     iconName: "Home"
@@ -21,7 +21,7 @@ const projects = [
     long: "An intelligent conversational agent capable of understanding user intent and extracting entities for dynamic responses. The project involves training custom NLU models and integrating external APIs via Rasa Actions to provide real-time information.",
     tech: ["Python", "Rasa", "NLP", "Machine Learning"],
     link: "https://your-demo-link.com",
-    github: "https://github.com/harikam1",
+    github: "https://github.com/harikam1/Vcs.git",
     // Modern AI/Neural network interface visual
     image: "https://learn.g2.com/hubfs/chatbot-3.jpg",
     iconName: "Bot"

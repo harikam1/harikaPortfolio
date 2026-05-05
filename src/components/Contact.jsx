@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import SectionHeader from "./SectionHeader";
@@ -11,7 +10,6 @@ export default function Contact() {
   const submit = async (e) => {
     e.preventDefault();
 
-    // validation
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       setStatus("error");
       setTimeout(() => setStatus("idle"), 3000);
@@ -26,13 +24,10 @@ export default function Contact() {
 
     try {
       setSending(true);
-
-      // simulate API call (replace with backend later)
       await new Promise((r) => setTimeout(r, 900));
-
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
-    } catch (err) {
+    } catch {
       setStatus("error");
     } finally {
       setSending(false);
@@ -76,39 +71,32 @@ export default function Contact() {
           desc="Open to internships, full-time roles, and collaborations."
         />
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mt-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
 
           {/* LEFT SIDE */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-4"
+            className="space-y-5"
           >
             {contacts.map((c) => (
-              // <a
-              //   key={c.label}
-              //   href={c.href}
-              //   target="_blank"
-              //   rel="noreferrer"
-              //   className="glass group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(180,140,255,0.25)]"
-              // >
-                <a
-                  key={c.label}
-                  href={c.href}
-                  target={c.href.startsWith("http") ? "_blank" : "_self"}
-                  rel="noreferrer"
-                  className="glass group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(180,140,255,0.25)]"
-                >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-neon-blue to-neon-purple shadow-lg group-hover:scale-110 transition-transform">
-                  <span className="text-lg">{c.icon}</span>
+              <a
+                key={c.label}
+                href={c.href}
+                target={c.href.startsWith("http") ? "_blank" : "_self"}
+                rel="noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-neon-purple hover:shadow-[0_10px_35px_rgba(150,100,255,0.25)]"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-neon-blue to-neon-purple text-white shadow-md transition-transform group-hover:scale-110">
+                  {c.icon}
                 </div>
+
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                  <p className="text-xs uppercase tracking-widest text-gray-400">
                     {c.label}
                   </p>
-                  <p className="text-sm font-medium text-foreground">
+                  <p className="text-sm font-semibold text-white group-hover:text-neon-blue transition">
                     {c.value}
                   </p>
                 </div>
@@ -118,18 +106,17 @@ export default function Contact() {
 
           {/* FORM */}
           <motion.form
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             onSubmit={submit}
-            className="glass-strong rounded-2xl p-6 sm:p-8"
+            className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-lg shadow-xl"
           >
-            <div className="grid gap-4">
+            <div className="grid gap-5">
 
               {/* NAME */}
               <div>
-                <label className="mb-2 block text-xs uppercase tracking-widest text-muted-foreground">
+                <label className="mb-2 block text-xs uppercase tracking-widest text-gray-400">
                   Name
                 </label>
                 <input
@@ -137,14 +124,14 @@ export default function Contact() {
                   onChange={(e) =>
                     setForm({ ...form, name: e.target.value })
                   }
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-neon-purple"
+                  className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/40 transition"
                   placeholder="Your name"
                 />
               </div>
 
               {/* EMAIL */}
               <div>
-                <label className="mb-2 block text-xs uppercase tracking-widest text-muted-foreground">
+                <label className="mb-2 block text-xs uppercase tracking-widest text-gray-400">
                   Email
                 </label>
                 <input
@@ -153,14 +140,14 @@ export default function Contact() {
                   onChange={(e) =>
                     setForm({ ...form, email: e.target.value })
                   }
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-neon-purple"
+                  className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/40 transition"
                   placeholder="you@example.com"
                 />
               </div>
 
               {/* MESSAGE */}
               <div>
-                <label className="mb-2 block text-xs uppercase tracking-widest text-muted-foreground">
+                <label className="mb-2 block text-xs uppercase tracking-widest text-gray-400">
                   Message
                 </label>
                 <textarea
@@ -169,7 +156,7 @@ export default function Contact() {
                     setForm({ ...form, message: e.target.value })
                   }
                   rows={5}
-                  className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-neon-purple"
+                  className="w-full resize-none rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/40 transition"
                   placeholder="Tell me about your project..."
                 />
               </div>
@@ -178,7 +165,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={sending}
-                className="rounded-xl bg-gradient-to-r from-neon-blue via-neon-purple to-neon-cyan px-6 py-3 text-sm text-white disabled:opacity-50"
+                className="mt-2 rounded-xl bg-gradient-to-r from-neon-blue via-neon-purple to-neon-cyan px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_25px_rgba(120,90,255,0.4)] disabled:opacity-50"
               >
                 {sending ? "Sending..." : "📤 Send Message"}
               </button>
@@ -190,10 +177,9 @@ export default function Contact() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="text-sm text-green-400 flex items-center gap-2"
+                    className="flex items-center gap-2 text-sm text-green-400"
                   >
-                    <span>✅</span>
-                    Message sent successfully!
+                    ✅ Message sent successfully!
                   </motion.div>
                 )}
 
@@ -202,10 +188,9 @@ export default function Contact() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="text-sm text-red-400 flex items-center gap-2"
+                    className="flex items-center gap-2 text-sm text-red-400"
                   >
-                    <span>❌</span>
-                    Please fill all fields correctly
+                    ❌ Please fill all fields correctly
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -217,4 +202,3 @@ export default function Contact() {
     </section>
   );
 }
-
