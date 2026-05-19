@@ -31,7 +31,7 @@ const projects = [
     desc: "Backend-driven resume builder with AWS S3 storage.",
     long: "PursuitPro streamlines the resume creation process. It features a robust backend architecture using Spring Boot to handle complex data structures, while AWS S3 ensures reliable storage for generated documents and user assets.",
     tech: ["Java", "Spring Boot", "AWS S3", "PostgreSQL"],
-    link: "https://your-demo-link.app",
+    link: "https://pursuitfuturepro.com/PursuitPro/",
     github: "https://github.com/harikam1",
     // Clean document/resume editor interface visual
     image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=1000&auto=format&fit=crop",
@@ -57,8 +57,6 @@ const LucideIcon = ({ name, ...props }) => {
 
 export default function Projects() {
   const [selected, setSelected] = useState(null);
-
-  // Prevent scrolling when a project is open
   useEffect(() => {
     if (selected) {
       document.body.style.overflow = "hidden";
@@ -66,7 +64,6 @@ export default function Projects() {
       document.body.style.overflow = "unset";
     }
   }, [selected]);
-
   return (
     <section id="projects" className="relative px-6 py-24 bg-transparent">
       <div className="mx-auto max-w-6xl">
