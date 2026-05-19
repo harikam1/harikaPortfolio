@@ -1,15 +1,13 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { SiSpringboot, SiReact, SiPostgresql, SiDocker } from "react-icons/si";
 
 export default function Hero() {
-
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
-
-    const navbarOffset = 120; // adjust if needed (100–140)
-
+    const navbarOffset = 100;
     const elementPosition = el.getBoundingClientRect().top + window.scrollY;
     const offsetPosition = elementPosition - navbarOffset;
 
@@ -19,90 +17,110 @@ export default function Hero() {
     });
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-20"
     >
-      <div className="text-center">
+      {/* Animated Background Blobs */}
+      <div className="absolute top-1/4 -left-20 h-72 w-72 animate-blob rounded-full bg-blue-600/20 mix-blend-multiply blur-3xl filter" />
+      <div className="animation-delay-2000 absolute top-1/3 -right-20 h-72 w-72 animate-blob rounded-full bg-purple-600/20 mix-blend-multiply blur-3xl filter" />
 
-        {/* Badge */}
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs text-muted-foreground backdrop-blur">
-          ✨ Available for opportunities
-        </div>
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 text-center"
+      >
+        {/* Availability Badge */}
+        <motion.div variants={itemVariants} className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-blue-300/80 backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
+          </span>
+          Actively Seeking New Opportunities
+        </motion.div>
 
-        {/* Title */}
-        <h1 className="text-4xl sm:text-6xl font-bold">
+        {/* Main Heading */}
+        <motion.h1 variants={itemVariants} className="text-5xl sm:text-7xl font-extrabold tracking-tight">
           Hi, I’m{" "}
-          {/* <span className="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-cyan bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">
             Yellakanti Harika
-          </span> */}
-          <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(120,180,255,0.8)]">
-  Yellakanti Harika
-</span>
-        </h1>
+          </span>
+        </motion.h1>
 
-        {/* Subtitle */}
-        <p className="mt-4 text-lg text-foreground/80">
-          Open for Full Stack <span className="text-neon-cyan">Java</span> Roles
-        </p>
+        {/* Professional Tagline - Updated to reflect "Open for role" */}
+        <motion.p variants={itemVariants} className="mx-auto mt-6 max-w-2xl text-lg sm:text-xl text-white/70 leading-relaxed">
+          Open for <span className="text-white font-medium italic underline decoration-blue-500/50">Java Full Stack Developer</span> roles. 
+          I specialize in building scalable backend systems with Spring Boot and crafting modern React interfaces.
+        </motion.p>
 
-        {/* Description */}
-        <p className="mt-2 text-sm text-muted-foreground">
-          Crafting clean APIs with Java & Spring Boot
-        </p>
+        {/* Dynamic Tech Stack Pills */}
+        <motion.div variants={itemVariants} className="mt-8 flex flex-wrap justify-center gap-3">
+          {[
+            { icon: <SiSpringboot />, label: "Spring Boot", color: "text-green-400" },
+            { icon: <SiReact />, label: "React.js", color: "text-cyan-400" },
+            { icon: <SiPostgresql />, label: "SQL", color: "text-blue-300" },
+            { icon: <SiDocker />, label: "Docker", color: "text-blue-500" },
+          ].map((tech, i) => (
+            <div key={i} className={`flex items-center gap-2 rounded-lg border border-white/5 bg-white/5 px-3 py-1.5 text-sm font-medium ${tech.color} backdrop-blur-sm transition hover:bg-white/10`}>
+              {tech.icon} <span>{tech.label}</span>
+            </div>
+          ))}
+        </motion.div>
 
-        {/* Buttons */}
-        <div className="mt-8 flex items-center justify-center gap-4">
+        {/* Primary Actions */}
+        <motion.div variants={itemVariants} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={() => scrollToSection("projects")}
-            className="rounded-xl bg-gradient-to-r from-neon-blue via-neon-purple to-neon-cyan px-6 py-3 font-medium text-primary-foreground shadow-[0_0_30px_rgba(180,140,255,0.4)] transition hover:scale-105"
+            className="group relative w-full sm:w-auto overflow-hidden rounded-xl bg-white px-8 py-4 font-bold text-black transition-all hover:scale-105 active:scale-95"
           >
-            View Projects →
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 transition-opacity group-hover:opacity-10" />
+            View My Work
           </button>
 
           <button
             onClick={() => scrollToSection("contact")}
-            className="rounded-xl border border-white/10 px-6 py-3 font-medium backdrop-blur transition hover:bg-white/5"
+            className="w-full sm:w-auto rounded-xl border border-white/10 bg-white/5 px-8 py-4 font-bold backdrop-blur-md transition hover:bg-white/10 hover:border-white/20 active:scale-95"
           >
             Contact Me
           </button>
-        </div>
+        </motion.div>
 
-        {/* Social Icons */}
-        <div className="mt-6 flex items-center justify-center gap-4">
-
-          {/* GitHub */}
-          <a
-            href="https://github.com/harikam1"
-            target="_blank"
-            rel="noreferrer"
-            className="p-3 rounded-full glass hover:scale-110 hover:shadow-[0_0_15px_rgba(180,140,255,0.5)] transition"
-          >
-            <FaGithub className="h-5 w-5 text-foreground" />
-          </a>
-
-          {/* Email */}
-          <a
-            href="mailto:harikayellakanti82@gmail.com"
-            className="p-3 rounded-full glass hover:scale-110 hover:shadow-[0_0_15px_rgba(180,140,255,0.5)] transition"
-          >
-            <MdEmail className="h-5 w-5 text-foreground" />
-          </a>
-
-          {/* LinkedIn */}
-          <a
-            href="https://linkedin.com/in/harikayellakanti"
-            target="_blank"
-            rel="noreferrer"
-            className="p-3 rounded-full glass hover:scale-110 hover:shadow-[0_0_15px_rgba(180,140,255,0.5)] transition"
-          >
-            <FaLinkedin className="h-5 w-5 text-foreground" />
-          </a>
-
-        </div>
-
-      </div>
+        {/* Social Connectivity */}
+        <motion.div variants={itemVariants} className="mt-12 flex items-center justify-center gap-6">
+          {[
+            { icon: <FaGithub />, link: "https://github.com/harikam1", label: "GitHub" },
+            { icon: <FaLinkedin />, link: "https://linkedin.com/in/harikayellakanti", label: "LinkedIn" },
+            { icon: <MdEmail />, link: "mailto:harikayellakanti82@gmail.com", label: "Email" },
+          ].map((social, i) => (
+            <a
+              key={i}
+              href={social.link}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={social.label}
+              className="group flex flex-col items-center gap-2 text-white/40 transition-all hover:text-white"
+            >
+              <span className="text-2xl transition-transform group-hover:-translate-y-1">{social.icon}</span>
+              <span className="text-[10px] uppercase tracking-widest opacity-0 transition-opacity group-hover:opacity-100">{social.label}</span>
+            </a>
+          ))}
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
